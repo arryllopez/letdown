@@ -1,4 +1,5 @@
 #include "game_loop.h"
+#include "../../game/scenes/title_screen.h"
 #include <pspkernel.h>
 #include <psprtc.h>
 
@@ -11,7 +12,7 @@ GameLoop::GameLoop()
 void GameLoop::run() {
     m_running = true;
 
-    m_scenes.pushScene(std::make_unique<game::scenes::TitleScreen>(*this));
+    m_scenes.changeScene(std::make_unique<game::scenes::TitleScreen>(*this));
     
 
     u64 lastTick;

@@ -16,7 +16,7 @@ void SceneManager::pushScene(std::unique_ptr<Scene> scene) {
 void SceneManager::popScene() {
     // changeScene() guarantees this won't be called on an empty stack, but just to be safe as this can cause crash at runtime
     if (m_scenes.empty()) {
-        return;
+        throw std::invalid_argument("SceneManager::popScene: scene stack is empty");
     }
     m_scenes.top()->onExit();
     m_scenes.pop();

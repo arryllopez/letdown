@@ -24,12 +24,14 @@ endif()
 include_directories(
     ${PSPSDK}/include
     ${PSPDEV}/include
+    ${PSPDEV}/psp/include
     ${CMAKE_SOURCE_DIR}/src
 )
 
 link_directories(
     ${PSPSDK}/lib
     ${PSPDEV}/lib
+    ${PSPDEV}/psp/lib
 )
 
 # ---------------------------------------------------------------------------
@@ -49,6 +51,7 @@ set(ENGINE_SOURCES
 )
 
 set(GAME_SOURCES
+    src/game/dialogue/dialogue_renderer.cpp
     src/game/world/tile_map.cpp
     src/game/world/player.cpp
     src/game/scenes/title_screen.cpp
@@ -67,9 +70,10 @@ add_executable(${PROJECT_NAME} ${ALL_SOURCES})
 # PSP libraries
 # ---------------------------------------------------------------------------
 target_link_libraries(${PROJECT_NAME}
-    osl            # OSLib
+    osl            # OSLib (highest level, linked first)
     png
     z
+    m
     pspgu
     pspge
     pspdisplay
@@ -77,10 +81,10 @@ target_link_libraries(${PROJECT_NAME}
     psprtc
     pspaudio
     psppower
-    pspsdk
+    psphprm
+    pspsdk         # SDK libs last — PSP requires this order
     pspuser
     pspkernel
-    m
 )
 
 # ---------------------------------------------------------------------------

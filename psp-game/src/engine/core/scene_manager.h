@@ -10,8 +10,6 @@ namespace engine::core {
 /// Push/pop scene stack. Top scene gets update() and draw().
 class SceneManager {
 public:
-    void pushScene(std::unique_ptr<Scene> scene);
-    void popScene();
     void changeScene(std::unique_ptr<Scene> scene);
 
     void update(float dt);
@@ -21,6 +19,9 @@ public:
 
 private:
     std::stack<std::unique_ptr<Scene>> m_scenes;
+    // private methods for pushing/popping scenes, called by changeScene(), keeping the public interface simple with just changeScene() for scene transitions 
+    void pushScene(std::unique_ptr<Scene> scene);
+    void popScene();
 };
 
 } // namespace engine::core

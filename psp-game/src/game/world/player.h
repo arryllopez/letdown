@@ -2,6 +2,7 @@
 
 #include "../../engine/graphics/sprite.h"
 #include "../../engine/graphics/animator.h"
+#include "../../engine/graphics/renderer.h"
 #include "../../engine/input/input.h"
 
 namespace game::world {
