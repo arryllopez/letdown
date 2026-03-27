@@ -3,6 +3,7 @@
 #include "scene.h"
 #include <memory>
 #include <stack>
+#include <stdexcept>
 
 namespace engine::core {
 

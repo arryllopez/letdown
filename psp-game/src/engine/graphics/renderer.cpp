@@ -24,7 +24,7 @@ void Renderer::endFrame() {
 }
 
 void Renderer::clear(unsigned int color) {
-  oslClearScreen(color);   
+    oslClearScreen(color);   
 }
 
 void Renderer::setCameraOffset(float x, float y) {
