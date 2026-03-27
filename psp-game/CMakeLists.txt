@@ -45,6 +45,7 @@ set(ENGINE_SOURCES
     src/engine/graphics/animator.cpp
     src/engine/cutscene/cutscene.cpp
     src/engine/core/game_loop.cpp
+    src/engine/core/scene_manager.cpp
 )
 
 set(GAME_SOURCES

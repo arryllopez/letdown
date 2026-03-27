@@ -11,7 +11,8 @@ GameLoop::GameLoop()
 void GameLoop::run() {
     m_running = true;
 
-    // TODO: push initial scene (e.g. TitleScreen) onto m_scenes
+    m_scenes.pushScene(std::make_unique<game::scenes::TitleScreen>(*this));
+    
 
     u64 lastTick;
     sceRtcGetCurrentTick(&lastTick);

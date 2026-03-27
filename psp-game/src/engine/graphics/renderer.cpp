@@ -11,16 +11,20 @@ Renderer::Renderer()
 
 Renderer::~Renderer() = default;
 
+// Drawing a new frame
 void Renderer::beginFrame() {
-    // TODO: oslStartDrawing(), clear buffer
+    oslStartDrawing();
 }
 
+
+// End the draw frame and sync to vsync
 void Renderer::endFrame() {
-    // TODO: oslEndDrawing(), oslSyncFrame()
+    oslEndDrawing();
+    oslSyncFrame();
 }
 
 void Renderer::clear(unsigned int color) {
-    // TODO: oslClearScreen(color)
+  oslClearScreen(color);   
 }
 
 void Renderer::setCameraOffset(float x, float y) {

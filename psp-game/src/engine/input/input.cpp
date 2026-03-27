@@ -6,36 +6,35 @@ Input::Input()
     : m_current{}
     , m_previous{}
 {
-    // TODO: sceCtrlSetSamplingCycle / sceCtrlSetSamplingMode
+    sceCtrlSetSamplingCycle(0);
+    sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
 }
 
 void Input::update() {
-    // TODO: copy current -> previous, sceCtrlReadBufferPositive into current
+    m_previous = m_current;
+    sceCtrlReadBufferPositive(&m_current, 1);
 }
 
 bool Input::held(uint32_t btn) const {
-    // TODO: return (m_current.Buttons & btn) != 0
-    return false;
+    return (m_current.Buttons & btn) != 0;
 }
 
 bool Input::pressed(uint32_t btn) const {
-    // TODO: held this frame, not held last frame
-    return false;
+    return (m_current.Buttons & btn) != 0
+        && (m_previous.Buttons & btn) == 0;
 }
 
 bool Input::released(uint32_t btn) const {
-    // TODO: not held this frame, held last frame
-    return false;
+    return (m_current.Buttons & btn) == 0
+        && (m_previous.Buttons & btn) != 0;
 }
 
 float Input::analogX() const {
-    // TODO: normalize m_current.Lx from [0,255] to [-1,1]
-    return 0.0f;
+    return (static_cast<float>(m_current.Lx) - 128.0f) / 128.0f;
 }
 
 float Input::analogY() const {
-    // TODO: normalize m_current.Ly from [0,255] to [-1,1]
-    return 0.0f;
+    return (static_cast<float>(m_current.Ly) - 128.0f) / 128.0f;
 }
 
 } // namespace engine::input

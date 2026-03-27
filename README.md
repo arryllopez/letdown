@@ -49,7 +49,6 @@ psp-game/
     └── dialogue/
 ```
 
-Everything is stubbed — compiles clean, zero real logic. Every function body you'll fill in yourself.
 
 ## Building
 
