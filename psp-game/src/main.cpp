@@ -1,7 +1,6 @@
 #include <pspkernel.h>
 #include <psppower.h>
 #include <oslib/oslib.h>
-
 #include "engine/core/game_loop.h"
 
 PSP_MODULE_INFO("letdown", 0, 1, 0);
@@ -30,6 +29,13 @@ void setupCallbacks() {
 int main() {
     setupCallbacks();
     scePowerSetClockFrequency(333, 333, 166);
+
+    // Set working directory to where the EBOOT lives
+    int chdirResult = sceIoChdir("ms0:/PSP/GAME/letdown/");
+    if (chdirResult < 0) {
+        sceKernelExitGame(); 
+        return -1; 
+    }
 
     // Initialize OSLib
     oslInit(0);

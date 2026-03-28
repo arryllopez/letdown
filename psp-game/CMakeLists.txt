@@ -69,20 +69,28 @@ add_executable(${PROJECT_NAME} ${ALL_SOURCES})
 # ---------------------------------------------------------------------------
 # PSP libraries
 # ---------------------------------------------------------------------------
+# Match PSPSDK's native link flags
+target_link_options(${PROJECT_NAME} PRIVATE
+    -Wl,-zmax-page-size=128
+    -Wl,--allow-multiple-definition
+)
+
 target_link_libraries(${PROJECT_NAME}
-    osl            # OSLib (highest level, linked first)
+    osl
     png
+    jpeg
     z
     m
-    pspgu
-    pspge
-    pspdisplay
-    pspctrl
-    psprtc
     pspaudio
     psppower
     psphprm
-    pspsdk         # SDK libs last — PSP requires this order
+    psprtc
+    pspdebug
+    pspdisplay
+    pspge
+    pspgu
+    pspctrl
+    pspsdk
     pspuser
     pspkernel
 )
