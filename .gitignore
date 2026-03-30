@@ -1,0 +1,22 @@
+# Build directories
+/build/
+/cmake-build-*/
+
+# CMake/Ninja generated files (for in-source builds)
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/Makefile
+/compile_commands.json
+/CTestTestfile.cmake
+/Testing/
+/install_manifest.txt
+
+# Compiled objects and binaries
+*.o
+*.obj
+*.a
+*.so
+*.out
+*.elf
+*.exe
