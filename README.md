@@ -2,11 +2,14 @@
 
 Inspired by *Oxenfree’s* 2.5D style and *Life is Strange’s* rich storytelling.
 
-tech stack 
-c 
-ppspp 
-pspdev 
-sceGu
+## Tech Stack
+
+| Component | Tools / Libraries |
+|----------|------------------|
+| Core Language | C |
+| Emulator (Testing) | PPSSPP |
+| Development Kit | PSPSDK / pspsdev |
+| Graphics API | sceGu |
 
 ## PSP-1000 Specifications
 
