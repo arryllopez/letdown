@@ -2,6 +2,12 @@
 
 Inspired by *Oxenfree’s* 2.5D style and *Life is Strange’s* rich storytelling.
 
+tech stack 
+c 
+ppspp 
+pspdev 
+sceGu
+
 ## PSP-1000 Specifications
 
 - **Display**
