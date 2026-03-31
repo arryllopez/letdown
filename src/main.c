@@ -1,4 +1,5 @@
 #include "../common/callbacks.h"
+#include "graphics/allocateVram.h"
 
 #include <pspuser.h>
 #include <pspdebug.h>
@@ -15,44 +16,27 @@ PSP_MAIN_THREAD_ATTR(PSP_THREAD_ATTR_USER);
 
 // Global Variable that starts the game loop
 int running = 1;
-// GE List, this is basically where the sceGu commands are stored before being sent to the GPU, this is required for rendering
+// GE List, this is basically where the sceGu commands are stored before being sent to the GE, this is required for rendering
 static unsigned int __attribute__((aligned(16))) list [262144];
 
-/*
-Each case basically describes the amount of bits allocated per color channel
-This function will calcualte how much memory in bytes a texture/image needs
-where width * height is the total number of pixels it has and psm is the pixel storage mode 
-psm is passed in based on the desired psm and switched to return the proper amount of bytes the 
-image/texture needs. 
-*/
+void initGraphics() { 
+    void* fbp0 = getStaticVramBuffer(PSP_BUF_WIDTH, PSP_SCR_HEIGHT, GU_PSM_8888); //back buffer, this is where the GE will render to before it is sent to the display
+    void* fbp1 = getStaticVramBuffer(PSP_BUF_WIDTH, PSP_SCR_HEIGHT, GU_PSM_8888); //front buffer, this is where the GE will send the rendered image to be displayed on the screen
+    void* zbp = getStaticVramBuffer(PSP_BUF_WIDTH, PSP_SCR_HEIGHT, GU_PSM_4444); //depth buffer, this is where the GE will store depth information for 3D rendering, this is required for 3D rendering but not used in this example
 
-static unsigned int getMemorySize(unsigned int width, unsigned int height, unsigned int psm) { 
-    unsigned int size = width * height;  //total pixel size of the texture/image
-    switch (psm) { 
-        case GU_PSM_T4: 
-            return size / 2; 
-        case GU_PSM_T8: 
-            return size; 
-        case GU_PSM_5650: 
-        case GU_PSM_5551: 
-        case GU_PSM_4444: // if this is using 4 r 4 g 4 b 4 a 
-            return size * 2;
-        case GU_PSM_T16:
-            return size * 2;
-        case GU_PSM_8888: 
-        case GU_PSM_T32; 
-            return size * 4; 
-        default: 
-            return EXIT_FAILURE; // must indicate a psmt ype or image wont even render at all 
-    }
+    sceGuInit();
+    sceGuStart(GU_DIRECT, list);
+    sceGuDrawBuffer(GU_PSM_8888, fbp0, PSP_BUF_WIDTH);
+    sceGuDispBuffer(PSP_SCR_WIDTH, PSP_SCR_HEIGHT, fbp1, PSP_BUF_WIDTH);
+    sceGuDepthBuffer(zbp, PSP_BUF_WIDTH);
 }
 
 int main()
 { 
-    SetupCalbacks(); 
+    SetupCallbacks(); 
 
     // im pretty sure i have a psp 1000 but in 2000+ models have 4 mb of vram compared to 2 mb in the 1000. 
-    sceGeEdramSetSize()
+    sceGeEdramSetSize();
 
     while (running) {
         // Game loop logic here
