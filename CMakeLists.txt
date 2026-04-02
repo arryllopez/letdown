@@ -4,6 +4,7 @@ project(hello)
 
 add_executable(${PROJECT_NAME}
     src/main.c
+    src/controller/userInput.c
     src/graphics/allocateVram.c
     src/graphics/graphicsBoilerplate.c
     common/callbacks.c
