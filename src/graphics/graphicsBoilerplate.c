@@ -44,7 +44,7 @@ void initGraphics(void) {
     sceGuFinish();
     sceGuSync(0, 0);
 
-    sceGuDisplayWaitVblankStart();
+    sceDisplayWaitVblankStart();
     sceGuDisplay(GU_TRUE);
 }
 
