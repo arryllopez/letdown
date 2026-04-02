@@ -5,6 +5,7 @@ project(hello)
 add_executable(${PROJECT_NAME}
     src/main.c
     src/graphics/allocateVram.c
+    src/graphics/graphicsBoilerplate.c
     common/callbacks.c
 )
 
@@ -17,6 +18,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     pspdebug
     pspdisplay
     pspge
+    pspgu
 )
 
 # Create an EBOOT.PBP file
