@@ -38,11 +38,25 @@ int main()
         pollLatch(); 
         pollPad(); 
 
-        // from this point on user input can be used 
 
-        // this sets to black because 00 is no red, 00 is no green, and 00 is no blue, and FF is full alpha, so the color is fully opaque black
-        sceGuClearColor(0xFF000000); // set clear color to black
-        sceGuClear(GU_COLOR_BUFFER_BIT | GU_DEPTH_BUFFER_BIT); // clear the color and depth buffer to the clear color
+        
+        // Title Screen 
+
+        if (gameState == STATE_TITLE_SCREEN) { 
+            TitleAction action = titleScreenUpdate();
+            if (titleScreenShutdown(action)) { 
+                running = 0; 
+            }
+            startFrame();
+            titleScreenRender();
+            endFrame();
+        }
+
+        // // from this point on user input can be used 
+
+        // // this sets to black because 00 is no red, 00 is no green, and 00 is no blue, and FF is full alpha, so the color is fully opaque black
+        // sceGuClearColor(0xFF000000); // set clear color to black
+        // sceGuClear(GU_COLOR_BUFFER_BIT | GU_DEPTH_BUFFER_BIT); // clear the color and depth buffer to the clear color
         endFrame(); 
     }
 
