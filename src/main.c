@@ -16,9 +16,10 @@ int running = 1;
 
 int main()
 { 
+    // Initialize callbacks, graphics, and state manager
     SetupCallbacks();
     initGraphics();
-    stateManagerInit();
+    stateManagerInit(); // init starts at title screen 
     sceCtrlSetSamplingCycle(0);
     sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
 

@@ -17,8 +17,25 @@ static void updateTitle(void) {
         return;
     }
 
+    if (action == TITLE_ACTION_SETTINGS) {
+        currentState = GAME_STATE_SETTINGS;
+        return;
+    }
+
     if (action == TITLE_ACTION_START_GAME || action == TITLE_ACTION_LOAD_GAME) {
         currentState = GAME_STATE_SCENE1;
+    }
+}
+
+static void updateSettings(void) {
+    if (isKeyDown(PSP_CTRL_START)) {
+        wantsQuit = 1;
+        return;
+    }
+
+    if (isKeyDown(PSP_CTRL_CIRCLE) || isKeyDown(PSP_CTRL_TRIANGLE)) {
+        currentState = GAME_STATE_TITLE;
+        titleScreenInit();
     }
 }
 
@@ -53,6 +70,9 @@ void stateManagerUpdate(void) {
         case GAME_STATE_TITLE:
             updateTitle();
             break;
+        case GAME_STATE_SETTINGS:
+            updateSettings();
+            break;
         case GAME_STATE_SCENE1:
         case GAME_STATE_SCENE2:
         case GAME_STATE_SCENE3:
@@ -66,6 +86,8 @@ void stateManagerRender(void) {
     switch (currentState) {
         case GAME_STATE_TITLE:
             titleScreenRender();
+            break;
+        case GAME_STATE_SETTINGS:
             break;
         case GAME_STATE_SCENE1:
         case GAME_STATE_SCENE2:
