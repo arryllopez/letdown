@@ -1,5 +1,7 @@
 #pragma once
 
+#pragma once
+
 int getJX(); 
 int getJY();
 void pollPad();

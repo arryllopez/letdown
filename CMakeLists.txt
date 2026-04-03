@@ -11,6 +11,8 @@ add_executable(${PROJECT_NAME}
     src/controller/userInput.c
     src/graphics/allocateVram.c
     src/graphics/graphicsBoilerplate.c
+    src/states/stateManager.c
+    src/states/title/title_screen.c
     common/callbacks.c
 )
 
